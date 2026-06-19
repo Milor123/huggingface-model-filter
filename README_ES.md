@@ -5,7 +5,7 @@
 </p>
 
 [![GitHub](https://img.shields.io/badge/GitHub-Milor123/huggingface--model--filter-181717?style=flat-square&logo=github)](https://github.com/Milor123/huggingface-model-filter)
-[![GreasyFork](https://img.shields.io/badge/GreasyFork-Instalar-green?style=flat-square&logo=tampermonkey)](https://greasyfork.org/)
+[![GreasyFork](https://img.shields.io/badge/GreasyFork-Instalar-green?style=flat-square&logo=tampermonkey)](https://greasyfork.org/es/scripts/583391-huggingface-model-filter)
 [![License](https://img.shields.io/badge/Licencia-MIT-blue?style=flat-square)](LICENSE)
 [![Versión](https://img.shields.io/badge/Versión-1.4-orange?style=flat-square)](https://github.com/Milor123/huggingface-model-filter)
 
