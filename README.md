@@ -50,7 +50,7 @@
 
 **Option A — GreasyFork (recommended):**
 
-> *Link pending — publish the script on GreasyFork first.*
+> [![](https://img.shields.io/badge/Install%20from%20GitHub-2ea44f?style=flat-square&logo=tampermonkey)](https://github.com/Milor123/huggingface-model-filter/raw/refs/heads/main/huggingface-model-filter.user.js) *Replace with the GreasyFork link once published.*
 
 **Option B — Manual:**
 

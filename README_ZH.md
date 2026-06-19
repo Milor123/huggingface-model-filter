@@ -52,7 +52,7 @@
 
 **方式 A — GreasyFork（推荐）：**
 
-> *链接待添加 — 请先在 GreasyFork 发布脚本。*
+> [![](https://img.shields.io/badge/从GitHub安装-2ea44f?style=flat-square&logo=tampermonkey)](https://github.com/Milor123/huggingface-model-filter/raw/refs/heads/main/huggingface-model-filter.user.js) *发布后替换为 GreasyFork 链接。*
 
 **方式 B — 手动安装：**
 
