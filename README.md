@@ -4,6 +4,7 @@
   🇬🇧 English · <a href="https://github.com/Milor123/huggingface-model-filter/blob/main/README_ES.md">🇪🇸 Español</a> · <a href="https://github.com/Milor123/huggingface-model-filter/blob/main/README_ZH.md">🇨🇳 中文</a>
 </p>
 
+[![GitHub](https://img.shields.io/badge/GitHub-Milor123/huggingface--model--filter-181717?style=flat-square&logo=github)](https://github.com/Milor123/huggingface-model-filter)
 [![GreasyFork](https://img.shields.io/badge/GreasyFork-Install-green?style=flat-square&logo=tampermonkey)](https://greasyfork.org/)
 [![License](https://img.shields.io/badge/License-MIT-blue?style=flat-square)](LICENSE)
 [![Version](https://img.shields.io/badge/Version-1.4-orange?style=flat-square)](https://github.com/Milor123/huggingface-model-filter)
