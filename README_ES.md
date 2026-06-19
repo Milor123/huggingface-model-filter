@@ -1,7 +1,7 @@
 # 🔍 HuggingFace Model Filter
 
 <p align="center">
-  <a href="README.md">🇬🇧 English</a> · 🇪🇸 Español · <a href="README_ZH.md">🇨🇳 中文</a>
+  <a href="https://github.com/Milor123/huggingface-model-filter/blob/main/README.md">🇬🇧 English</a> · 🇪🇸 Español · <a href="https://github.com/Milor123/huggingface-model-filter/blob/main/README_ZH.md">🇨🇳 中文</a>
 </p>
 
 [![GreasyFork](https://img.shields.io/badge/GreasyFork-Install-green?style=flat-square&logo=tampermonkey)](https://greasyfork.org/)
