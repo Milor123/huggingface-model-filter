@@ -42,15 +42,14 @@
 
 ### 2. Instalá el script
 
-<p align="center">
-  <a href="https://github.com/Milor123/huggingface-model-filter/raw/refs/heads/main/huggingface-model-filter.user.js">
-    <img src="https://img.shields.io/badge/Instalar%20Userscript-2ea44f?style=for-the-badge&logo=tampermonkey" alt="Instalar Userscript">
-  </a>
-</p>
 
 **Opción A — GreasyFork (recomendado):**
 
-> [![](https://img.shields.io/badge/Instalar%20desde%20GitHub-2ea44f?style=flat-square&logo=tampermonkey)](https://github.com/Milor123/huggingface-model-filter/raw/refs/heads/main/huggingface-model-filter.user.js) *Reemplazá con el link de GreasyFork cuando lo publiques.*
+<p align="center">
+  <a href="https://github.com/Milor123/huggingface-model-filter/raw/refs/heads/main/huggingface-model-filter.user.js">
+    <img src="https://img.shields.io/badge/Install%20Userscript-2ea44f?style=for-the-badge&logo=tampermonkey" alt="Install Userscript">
+  </a>
+</p>
 
 **Opción B — Manual:**
 
