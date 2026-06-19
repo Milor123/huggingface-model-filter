@@ -3,14 +3,16 @@
 // @namespace https://github.com/Milor123/huggingface-model-filter
 // @version      1.4
 // @description  Filter HuggingFace models by positive/negative keywords with a floating, draggable, persistent UI. Supports infinite scroll, dark mode, auto-filter, multi-language (EN/ES/ZH + 30 Google Translate), and localStorage persistence.
-// @author       Tu Nombre
+// @author       Mateo Bohorquez (Milor123)
 // @match        https://huggingface.co/models*
 // @match        https://huggingface.co/models?*
 // @grant        GM_addStyle
 // @run-at       document-end
 // @license      MIT
-// @homepageURL  https://github.com/tuusuario/huggingface-model-filter
-// @supportURL   https://github.com/tuusuario/huggingface-model-filter/issues
+// @homepageURL  https://github.com/Milor123/huggingface-model-filter
+// @supportURL   https://github.com/Milor123/huggingface-model-filter/issues
+// @downloadURL  https://github.com/Milor123/huggingface-model-filter/raw/refs/heads/main/huggingface-model-filter.user.js
+// @updateURL    https://github.com/Milor123/huggingface-model-filter/raw/refs/heads/main/huggingface-model-filter.user.js
 // @icon         https://huggingface.co/favicon.ico
 // ==/UserScript==
 
