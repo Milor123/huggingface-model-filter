@@ -52,7 +52,7 @@
 
 **方式 A — GreasyFork（推荐）：**
 
-> 发布后在此处填写 GreasyFork 直接安装链接。
+> *链接待添加 — 请先在 GreasyFork 发布脚本。*
 
 **方式 B — 手动安装：**
 

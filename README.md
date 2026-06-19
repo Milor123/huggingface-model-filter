@@ -50,7 +50,7 @@
 
 **Option A — GreasyFork (recommended):**
 
-> Add the direct GreasyFork link here when you publish it.
+> *Link pending — publish the script on GreasyFork first.*
 
 **Option B — Manual:**
 
