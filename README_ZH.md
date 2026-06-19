@@ -12,13 +12,8 @@
 
 ## 📸 预览截图
 
-> 将以下占位图替换为你自己的截图。
-
-![浮动面板](docs/images/panel-preview.png)
-*可拖拽的浮动过滤面板 — 毛玻璃设计，支持暗色模式*
-
-![过滤结果](docs/images/results-preview.png)
-*绿色 badge = 正面匹配，红色 badge = 负面匹配，半透明 = 被过滤*
+![浮动面板 + 过滤结果](https://github.com/user-attachments/assets/bdc8d4fb-09c8-45de-8cf5-81dc2bb02097)
+*可拖拽的浮动过滤面板 — 毛玻璃设计，支持暗色模式。绿色 badge = 正面匹配，红色 badge = 负面匹配，半透明 = 被过滤*
 
 ---
 

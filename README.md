@@ -10,13 +10,8 @@
 
 ## 📸 Preview
 
-> Add your own screenshots here by replacing these placeholders.
-
-![Floating panel](docs/images/panel-preview.png)
-*Floating draggable filter panel — glassmorphism design with dark mode support*
-
-![Filtered results](docs/images/results-preview.png)
-*Green badge = positive match, red badge = negative match, dimmed = filtered out*
+![Floating panel + filtered results](https://github.com/user-attachments/assets/bdc8d4fb-09c8-45de-8cf5-81dc2bb02097)
+*Floating draggable filter panel — glassmorphism design with dark mode support. Green badge = positive match, red badge = negative match, dimmed = filtered out*
 
 ---
 

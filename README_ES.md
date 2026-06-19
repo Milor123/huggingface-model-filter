@@ -10,13 +10,8 @@
 
 ## 📸 Vista Previa
 
-> Agregá tus capturas de pantalla aquí reemplazando estos placeholders.
-
-![Panel flotante](docs/images/panel-preview.png)
-*Panel de filtros flotante y arrastrable — glassmorphism con dark mode*
-
-![Resultados filtrados](docs/images/results-preview.png)
-*Modelos en verde (match positivo), en rojo (match negativo), difuminados o completamente ocultos*
+![Panel flotante + resultados filtrados](https://github.com/user-attachments/assets/bdc8d4fb-09c8-45de-8cf5-81dc2bb02097)
+*Panel de filtros flotante y arrastrable — glassmorphism con dark mode. Verde = match positivo, rojo = match negativo, difuminado = filtrado*
 
 ---
 
