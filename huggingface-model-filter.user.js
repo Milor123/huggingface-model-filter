@@ -1,9 +1,13 @@
 // ==UserScript==
-// @name         HuggingFace Model Filter
-// @namespace https://github.com/Milor123/huggingface-model-filter
-// @version      1.4
-// @description  Filter HuggingFace models by positive/negative keywords with a floating, draggable, persistent UI. Supports infinite scroll, dark mode, auto-filter, multi-language (EN/ES/ZH + 30 Google Translate), and localStorage persistence.
-// @author       Mateo Bohorquez (Milor123)
+// @name          HuggingFace Model Filter
+// @name:es       Filtro de Modelos de HuggingFace
+// @name:zh-CN    HuggingFace 模型过滤器
+// @namespace     https://github.com/Milor123/huggingface-model-filter
+// @version       1.4
+// @description   Filter HuggingFace models by positive/negative keywords with a floating, draggable, persistent UI. Supports infinite scroll, dark mode, auto-filter, multi-language (EN/ES/ZH + 30 Google Translate), and localStorage persistence.
+// @description:es Filtra modelos de HuggingFace por palabras clave positivas/negativas con una interfaz flotante, arrastrable y persistente. Soporta scroll infinito, modo oscuro, auto-filtro, multi-idioma (EN/ES/ZH + 30 idiomas con Google Translate) y persistencia en localStorage.
+// @description:zh-CN 通过正面/负面关键词筛选 HuggingFace 模型，带有浮动、可拖拽、持久化的界面。支持无限滚动、暗黑模式、自动筛选、多语言（英语/西班牙语/中文 + 30 种 Google 翻译语言）和 localStorage 持久化。
+// @author        Mateo Bohorquez (Milor123)
 // @match        https://huggingface.co/models*
 // @match        https://huggingface.co/models?*
 // @grant        GM_addStyle
