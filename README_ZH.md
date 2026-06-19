@@ -44,15 +44,13 @@
 
 ### 2. 安装脚本
 
-<p align="center">
-  <a href="https://github.com/Milor123/huggingface-model-filter/raw/refs/heads/main/huggingface-model-filter.user.js">
-    <img src="https://img.shields.io/badge/安装用户脚本-2ea44f?style=for-the-badge&logo=tampermonkey" alt="安装用户脚本">
-  </a>
-</p>
-
 **方式 A — GreasyFork（推荐）：**
 
-> [![](https://img.shields.io/badge/从GitHub安装-2ea44f?style=flat-square&logo=tampermonkey)](https://github.com/Milor123/huggingface-model-filter/raw/refs/heads/main/huggingface-model-filter.user.js) *发布后替换为 GreasyFork 链接。*
+<p align="center">
+  <a href="https://github.com/Milor123/huggingface-model-filter/raw/refs/heads/main/huggingface-model-filter.user.js">
+    <img src="https://img.shields.io/badge/Install%20Userscript-2ea44f?style=for-the-badge&logo=tampermonkey" alt="Install Userscript">
+  </a>
+</p>
 
 **方式 B — 手动安装：**
 
