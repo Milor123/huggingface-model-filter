@@ -1,5 +1,9 @@
 # 🔍 HuggingFace Model Filter
 
+<p align="center">
+  <a href="README.md">English</a> · Español · <a href="README_ZH.md">中文</a>
+</p>
+
 [![GreasyFork](https://img.shields.io/badge/GreasyFork-Install-green?style=flat-square&logo=tampermonkey)](https://greasyfork.org/)
 [![License](https://img.shields.io/badge/License-MIT-blue?style=flat-square)](LICENSE)
 [![Version](https://img.shields.io/badge/Version-1.4-orange?style=flat-square)]()
