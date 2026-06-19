@@ -49,6 +49,12 @@
 
 ### 2. 安装脚本
 
+<p align="center">
+  <a href="https://github.com/Milor123/huggingface-model-filter/raw/refs/heads/main/huggingface-model-filter.user.js">
+    <img src="https://img.shields.io/badge/安装用户脚本-2ea44f?style=for-the-badge&logo=tampermonkey" alt="安装用户脚本">
+  </a>
+</p>
+
 **方式 A — GreasyFork（推荐）：**
 
 > 发布后在此处填写 GreasyFork 直接安装链接。
