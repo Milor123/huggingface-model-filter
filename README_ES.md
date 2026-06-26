@@ -37,6 +37,12 @@
 
 ---
 
+## 🤝 Complemento Recomendado
+
+Recomiendo usar [**PageTual**](https://greasyfork.org/es/scripts/438684) junto con este script — carga automáticamente la página siguiente mientras hacés scroll, eliminando la necesidad de hacer clic en la paginación. Funciona perfectamente con HuggingFace Model Filter para una experiencia de scroll infinito sobre tus resultados filtrados.
+
+---
+
 ## 📦 Instalación
 
 ### 1. Instalá un gestor de userscripts

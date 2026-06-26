@@ -37,6 +37,12 @@
 
 ---
 
+## 🤝 Recommended Companion
+
+I recommend using [**PageTual**](https://greasyfork.org/es/scripts/438684) alongside this script — it automatically loads the next page as you scroll, so you never have to click through pagination. Works seamlessly with HuggingFace Model Filter for an infinite-scroll browsing experience through your filtered results.
+
+---
+
 ## 📦 Installation
 
 ### 1. Install a userscript manager
