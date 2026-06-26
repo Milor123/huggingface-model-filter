@@ -238,7 +238,29 @@ To debug the script in your browser:
 - [ ] Filter by number of likes / downloads
 - [ ] Export / import configuration as JSON
 - [ ] Keyboard shortcuts (e.g. `Ctrl+Shift+F` to focus the panel)
-- [ ] Advanced regular expression support
+
+---
+
+## 🔬 Advanced Mode: Regular Expressions (Regex)
+
+> **Experimental**: Check the **"Advanced Mode"** checkbox in the panel to use Regex.
+
+### Practical examples
+
+| Goal | Field | Pattern | Description |
+|------|-------|---------|-------------|
+| Only Llama models | Positive | `.*llama.*` | Show only models with "llama" in the name |
+| Exclude GGUF | Negative | `.*gguf.*` | Hide GGUF quantized models |
+| Starts with "mistral" | Positive | `^mistral` | Only models whose name starts with "mistral" |
+| Exclude chat/instruct | Negative | `.*(chat\|instruct)$` | Hide models ending in "chat" or "instruct" |
+
+### Support and limitations
+
+✅ **Supported**: `.*`, `^`, `$`, `[a-z]`, `(group)`, `\|` (OR operator), case-insensitive.
+
+❌ **Not supported**: Complex lookaheads/lookbehinds (`(?=...)`, `(?<=...)`), multiline mode.
+
+⚠️ **Important**: An invalid regex (e.g., unclosed parenthesis) won't apply the filter. Check the console (F12) if something doesn't work.
 
 ---
 

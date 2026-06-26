@@ -239,7 +239,29 @@ Para depurar el script en tu navegador:
 - [ ] Filtro por número de likes / descargas
 - [ ] Exportar / importar configuración como JSON
 - [ ] Atajos de teclado (ej: `Ctrl+Shift+F` para enfocar el panel)
-- [ ] Soporte para expresiones regulares avanzadas
+
+---
+
+## 🔬 Modo Avanzado: Expresiones Regulares (Regex)
+
+> **Experimental**: Activa la casilla **"Modo Avanzado"** en el panel para usar Regex.
+
+### Ejemplos prácticos
+
+| Objetivo | Campo | Patrón | Descripción |
+|----------|-------|--------|-------------|
+| Solo modelos Llama | Positivo | `.*llama.*` | Muestra solo modelos con "llama" en el nombre |
+| Excluir GGUF | Negativo | `.*gguf.*` | Oculta modelos cuantizados en GGUF |
+| Empieza con "mistral" | Positivo | `^mistral` | Solo modelos cuyo nombre inicia con "mistral" |
+| Excluir chat/instruct | Negativo | `.*(chat\|instruct)$` | Oculta modelos que terminan en "chat" o "instruct" |
+
+### Soporte y limitaciones
+
+✅ **Soportado**: `.*`, `^`, `$`, `[a-z]`, `(grupo)`, `\|` (operador O), insensible a mayúsculas/minúsculas.
+
+❌ **No soportado**: Lookaheads/lookbehinds complejos (`(?=...)`, `(?<=...)`), modo multilínea.
+
+⚠️ **Importante**: Un regex inválido (ej: paréntesis sin cerrar) no aplicará el filtro. Revisa la consola (F12) si algo no funciona.
 
 ---
 
