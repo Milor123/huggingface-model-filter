@@ -54,6 +54,13 @@
             highlightPositive: 'Highlight positive matches',
             caseSensitive: 'Case sensitive',
             matchFullWord: 'Match whole word only',
+            advancedMode: 'Advanced Mode (Regex)',
+            positiveRegexLabel: 'Positive Regex Patterns',
+            positiveRegexPlaceholder: 'pattern1, pattern2...',
+            positiveRegexHint: 'Regex patterns to match (one per line or comma-separated)',
+            negativeRegexLabel: 'Negative Regex Patterns',
+            negativeRegexPlaceholder: 'pattern1, pattern2...',
+            negativeRegexHint: 'Regex patterns to exclude (one per line or comma-separated)',
             total: 'Total',
             visible: 'Visible',
             filtered: 'Filtered',
@@ -92,6 +99,13 @@
             highlightPositive: '高亮显示正向匹配',
             caseSensitive: '区分大小写',
             matchFullWord: '匹配完整单词',
+            advancedMode: '高级模式（正则表达式）',
+            positiveRegexLabel: '正向正则表达式模式',
+            positiveRegexPlaceholder: '模式 1, 模式 2...',
+            positiveRegexHint: '用于匹配的正则表达式模式（每行一个或用逗号分隔）',
+            negativeRegexLabel: '负向正则表达式模式',
+            negativeRegexPlaceholder: '模式 1, 模式 2...',
+            negativeRegexHint: '用于排除的正则表达式模式（每行一个或用逗号分隔）',
             total: '总计',
             visible: '可见',
             filtered: '已过滤',
@@ -130,6 +144,13 @@
             highlightPositive: 'Resaltar coincidencias positivas',
             caseSensitive: 'Distinguir mayúsculas/minúsculas',
             matchFullWord: 'Coincidir palabra completa',
+            advancedMode: 'Modo Avanzado (Regex)',
+            positiveRegexLabel: 'Patrones Regex Positivos',
+            positiveRegexPlaceholder: 'patrón1, patrón2...',
+            positiveRegexHint: 'Patrones regex para mostrar (uno por línea o separado por comas)',
+            negativeRegexLabel: 'Patrones Regex Negativos',
+            negativeRegexPlaceholder: 'patrón1, patrón2...',
+            negativeRegexHint: 'Patrones regex para excluir (uno por línea o separado por comas)',
             total: 'Total',
             visible: 'Visibles',
             filtered: 'Filtrados',
@@ -217,6 +238,9 @@
     const defaultConfig = {
         positiveKeywords: [],
         negativeKeywords: [],
+        positiveRegexPatterns: [],
+        negativeRegexPatterns: [],
+        advancedModeEnabled: false,
         hideOnNegative: true,
         dimOnNegative: false,
         highlightPositive: true,
@@ -354,6 +378,18 @@
         return t.includes(k);
     }
 
+    function matchesRegexPattern(text, pattern) {
+        if (!text || !pattern) return false;
+        try {
+            const flags = config.caseSensitive ? '' : 'i';
+            const regex = new RegExp(pattern.trim(), flags);
+            return regex.test(text);
+        } catch(e) {
+            console.log('HF Filter: Invalid regex pattern:', pattern, e);
+            return false;
+        }
+    }
+
     // ==========================================
     // LÓGICA DE FILTRADO
     // ==========================================
@@ -378,8 +414,29 @@
     }
 
     function checkKeywords(text) {
-        const pos = config.positiveKeywords.filter(k => k.trim()).some(k => matchesKeyword(text, k));
-        const neg = config.negativeKeywords.filter(k => k.trim()).some(k => matchesKeyword(text, k));
+        let pos = false;
+        let neg = false;
+
+        // Check regular keywords
+        if (config.positiveKeywords.filter(k => k.trim()).length > 0) {
+            pos = config.positiveKeywords.filter(k => k.trim()).some(k => matchesKeyword(text, k));
+        }
+        if (config.negativeKeywords.filter(k => k.trim()).length > 0) {
+            neg = config.negativeKeywords.filter(k => k.trim()).some(k => matchesKeyword(text, k));
+        }
+
+        // Check regex patterns if advanced mode is enabled
+        if (config.advancedModeEnabled) {
+            if (config.positiveRegexPatterns.filter(p => p.trim()).length > 0) {
+                const posRegex = config.positiveRegexPatterns.filter(p => p.trim()).some(p => matchesRegexPattern(text, p));
+                pos = pos || posRegex;
+            }
+            if (config.negativeRegexPatterns.filter(p => p.trim()).length > 0) {
+                const negRegex = config.negativeRegexPatterns.filter(p => p.trim()).some(p => matchesRegexPattern(text, p));
+                neg = neg || negRegex;
+            }
+        }
+
         return { positive: pos, negative: neg };
     }
 
@@ -540,6 +597,23 @@
                         <input type="checkbox" id="hf-word" ${config.matchFullWord ? 'checked' : ''}>
                         <span>${t('matchFullWord')}</span>
                     </label>
+                    <hr class="hf-options-divider">
+                    <label class="hf-checkbox">
+                        <input type="checkbox" id="hf-advanced-mode" ${config.advancedModeEnabled ? 'checked' : ''}>
+                        <span>${t('advancedMode')}</span>
+                    </label>
+                    <div id="hf-advanced-wrap" style="${config.advancedModeEnabled ? '' : 'display: none;'}">
+                        <div class="hf-section" style="margin-top: 12px;">
+                            <label class="hf-label">${t('positiveRegexLabel')}</label>
+                            <textarea id="hf-positive-regex" placeholder="${t('positiveRegexPlaceholder')}" rows="3">${config.positiveRegexPatterns.join(', ')}</textarea>
+                            <div class="hf-hint">${t('positiveRegexHint')}</div>
+                        </div>
+                        <div class="hf-section">
+                            <label class="hf-label">${t('negativeRegexLabel')}</label>
+                            <textarea id="hf-negative-regex" placeholder="${t('negativeRegexPlaceholder')}" rows="3">${config.negativeRegexPatterns.join(', ')}</textarea>
+                            <div class="hf-hint">${t('negativeRegexHint')}</div>
+                        </div>
+                    </div>
                     <hr class="hf-options-divider">
                     <label class="hf-checkbox">
                         <input type="checkbox" id="hf-auto-translate" ${config.autoTranslate ? 'checked' : ''}>
@@ -985,9 +1059,14 @@
         document.getElementById('hf-apply').addEventListener('click', () => {
             const posText = document.getElementById('hf-positive').value;
             const negText = document.getElementById('hf-negative').value;
+            const posRegexText = document.getElementById('hf-positive-regex') ? document.getElementById('hf-positive-regex').value : '';
+            const negRegexText = document.getElementById('hf-negative-regex') ? document.getElementById('hf-negative-regex').value : '';
 
             config.positiveKeywords = posText.split(',').map(s => s.trim()).filter(Boolean);
             config.negativeKeywords = negText.split(',').map(s => s.trim()).filter(Boolean);
+            config.positiveRegexPatterns = posRegexText.split(/[,\n]/).map(s => s.trim()).filter(Boolean);
+            config.negativeRegexPatterns = negRegexText.split(/[,\n]/).map(s => s.trim()).filter(Boolean);
+            config.advancedModeEnabled = document.getElementById('hf-advanced-mode') ? document.getElementById('hf-advanced-mode').checked : false;
             config.hideOnNegative = document.getElementById('hf-hide-negative').checked;
             config.dimOnNegative = document.getElementById('hf-dim-negative').checked;
             config.highlightPositive = document.getElementById('hf-highlight').checked;
@@ -1010,11 +1089,18 @@
         document.getElementById('hf-reset').addEventListener('click', () => {
             document.getElementById('hf-positive').value = '';
             document.getElementById('hf-negative').value = '';
+            if (document.getElementById('hf-positive-regex')) {
+                document.getElementById('hf-positive-regex').value = '';
+                document.getElementById('hf-negative-regex').value = '';
+            }
             document.getElementById('hf-hide-negative').checked = true;
             document.getElementById('hf-dim-negative').checked = false;
             document.getElementById('hf-highlight').checked = true;
             document.getElementById('hf-case').checked = false;
             document.getElementById('hf-word').checked = false;
+            if (document.getElementById('hf-advanced-mode')) {
+                document.getElementById('hf-advanced-mode').checked = false;
+            }
 
             config = { ...defaultConfig, locale: config.locale, autoTranslate: config.autoTranslate, autoTranslateLang: config.autoTranslateLang };
             saveConfig();
@@ -1045,9 +1131,30 @@
             });
         });
 
+        // Add auto-filter for regex fields if advanced mode is enabled
+        ['hf-positive-regex', 'hf-negative-regex'].forEach(id => {
+            const el = document.getElementById(id);
+            if (el) {
+                el.addEventListener('input', () => {
+                    if (!config.autoFilter || !config.advancedModeEnabled) return;
+                    clearTimeout(debounceTimer);
+                    debounceTimer = setTimeout(() => {
+                        document.getElementById('hf-apply').click();
+                    }, 800);
+                });
+            }
+        });
+
         document.querySelectorAll('.hf-options input[type="checkbox"]').forEach(cb => {
             if (cb.id === 'hf-auto-translate') return;
             cb.addEventListener('change', () => {
+                // Toggle advanced mode section visibility
+                if (cb.id === 'hf-advanced-mode') {
+                    const advancedWrap = document.getElementById('hf-advanced-wrap');
+                    if (advancedWrap) {
+                        advancedWrap.style.display = cb.checked ? '' : 'none';
+                    }
+                }
                 document.getElementById('hf-apply').click();
             });
         });
