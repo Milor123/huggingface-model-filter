@@ -103,6 +103,11 @@ The filter supports **regular expressions (Regex)** for advanced pattern matchin
 - Separate multiple patterns with **commas** or **newlines**
 - Case sensitivity and full-word matching settings also apply to Regex mode
 
+### Preview
+
+<img width="1462" height="921" alt="imagen" src="https://github.com/user-attachments/assets/fc4f7cc8-c8cb-43f9-b53c-c0e654a811b3" />
+
+
 ### Supported patterns
 
 | Pattern | Description | Example |
