@@ -10,6 +10,8 @@
 // @author        Mateo Bohorquez (Milor123)
 // @match        https://huggingface.co/models*
 // @match        https://huggingface.co/models?*
+// @match        https://huggingface.co/*/models*
+// @match        https://huggingface.co/*/models?*
 // @grant        GM_addStyle
 // @run-at       document-end
 // @license      MIT
