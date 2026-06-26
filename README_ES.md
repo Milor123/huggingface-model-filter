@@ -104,6 +104,11 @@ El filtro soporta **expresiones regulares (Regex)** para búsqueda avanzada. Act
 - Separá múltiples patrones con **comas** o **saltos de línea**
 - La configuración de mayúsculas/minúsculas y palabra completa también aplica al modo Regex
 
+### Vista Previa
+
+<img width="1462" height="921" alt="imagen" src="https://github.com/user-attachments/assets/fc4f7cc8-c8cb-43f9-b53c-c0e654a811b3" />
+
+
 ### Patrones soportados
 
 | Patrón | Descripción | Ejemplo |
