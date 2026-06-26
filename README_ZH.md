@@ -106,6 +106,11 @@
 - 多个模式之间用**逗号**或**换行**分隔
 - 大小写匹配和全词匹配设置同样适用于 Regex 模式
 
+### 预览
+
+<img width="1462" height="921" alt="imagen" src="https://github.com/user-attachments/assets/fc4f7cc8-c8cb-43f9-b53c-c0e654a811b3" />
+
+
 ### 支持的语法
 
 | 模式 | 说明 | 示例 |
