@@ -7,9 +7,9 @@
 [![GitHub](https://img.shields.io/badge/GitHub-Milor123/huggingface--model--filter-181717?style=flat-square&logo=github)](https://github.com/Milor123/huggingface-model-filter)
 [![GreasyFork](https://img.shields.io/badge/GreasyFork-Install-green?style=flat-square&logo=tampermonkey)](https://greasyfork.org/es/scripts/583391-huggingface-model-filter)
 [![License](https://img.shields.io/badge/License-MIT-blue?style=flat-square)](LICENSE)
-[![Version](https://img.shields.io/badge/Version-1.4-orange?style=flat-square)](https://github.com/Milor123/huggingface-model-filter)
+[![Version](https://img.shields.io/badge/Version-1.5-orange?style=flat-square)](https://github.com/Milor123/huggingface-model-filter)
 
-> A powerful userscript to filter Hugging Face models by positive/negative keywords, featuring a floating draggable panel, multi-language support, and automatic infinite scroll detection. Built for ViolentMonkey / TamperMonkey / Greasemonkey.
+> A powerful userscript to filter Hugging Face models by positive/negative keywords, with Regex support, a floating draggable panel, multi-language interface, and automatic infinite scroll detection. Works on all model listing pages including user/organization profiles. Built for ViolentMonkey / TamperMonkey / Greasemonkey.
 
 ---
 
@@ -26,9 +26,11 @@
 - ❌ **Negative keyword filtering** — Hide or dim models you don't want to see
 - 🎨 **Modern floating UI** — Draggable, minimizable, glassmorphism, auto dark mode
 - 🔄 **Infinite Scroll** — Automatically detects new models on scroll (SPA-aware)
+- 👥 **User/org pages** — Works on any Hugging Face model listing, including user and organization profiles
 - 💾 **Full persistence** — Keywords, options, and panel position saved to `localStorage`
 - 🏷️ **Visual badges** — Color-coded indicators (green/red) on each model card
 - ⚡ **Smart auto-filter** — Applies filters automatically as you type (~800ms debounce)
+- 🅰️ **Regex support** — Advanced search with regular expressions for pattern matching
 - 🌍 **Multi-language** — Native UI in English, Spanish, and Simplified Chinese (中文)
 - 🌐 **Auto-translate (optional)** — Google Translate for 30+ additional languages, always explicitly opt-in by the user
 - 📊 **Live stats counter** — Total / Visible / Filtered counts updated in real time
@@ -87,6 +89,40 @@ Visit [https://huggingface.co/models](https://huggingface.co/models) and the flo
 - **Auto-translate** — Optional checkbox: pick any language from the list and the panel translates automatically
 - **Apply** — Run filtering manually
 - **Reset** — Clear keywords and show all models again
+
+---
+
+## 🅰️ Regex Mode
+
+The filter supports **regular expressions (Regex)** for advanced pattern matching. Toggle between simple keyword mode and regex mode directly from the panel.
+
+### How it works
+
+- Enter **positive Regex patterns** to match models you want to see
+- Enter **negative Regex patterns** to filter out unwanted models
+- Separate multiple patterns with **commas** or **newlines**
+- Case sensitivity and full-word matching settings also apply to Regex mode
+
+### Supported patterns
+
+| Pattern | Description | Example |
+|---------|-------------|---------|
+| `keyword` | Simple match (same as keyword mode) | `llama` |
+| `llama\|qwen` | OR — matches either term | `llama\|qwen` |
+| `(?=.*qwen)(?=.*uncensored)` | Positive lookahead — match if ALL patterns present | `(?=.*qwen)(?=.*uncensored)` |
+| `^(?!.*beta)` | Negative lookahead — exclude if pattern matches | `^(?!.*beta)` |
+| `\b7b\b` | Word boundary — "7b" won't match "70b" | `\b7b\b` |
+| `[0-9]+b` | Character classes and quantifiers | `7b\|13b\|70b` |
+
+> **Note:** Patterns are matched against the model card text. Invalid Regex patterns are silently ignored and logged to the console (`HF Filter:` ) for debugging.
+
+### Example Regex filters
+
+| Positive Regex | Negative Regex | Result |
+|----------------|----------------|--------|
+| `(?=.*qwen)(?=.*uncensored)` | | Models containing BOTH "qwen" AND "uncensored" |
+| `llama\|mistral` | `beta\|alpha` | LLaMA or Mistral models, no unstable versions |
+| `\b7b\b` | `\b70b\b` | 7B models specifically, excluding 70B |
 
 ---
 
@@ -185,7 +221,7 @@ To debug the script in your browser:
 
 | Problem | Solution |
 |---------|----------|
-| Panel doesn't appear | Verify the URL matches `https://huggingface.co/models*` |
+| Panel doesn't appear | Make sure you're on a Hugging Face model listing page (e.g. `huggingface.co/models` or `huggingface.co/:user/models`) |
 | Filters don't apply | Click **Apply Filters** or wait ~800ms after typing |
 | ALL models are hidden | Check that your positive keywords aren't too restrictive. Reload the page |
 | Panel blocks content | Drag it to another corner; position is saved automatically |
@@ -195,6 +231,11 @@ To debug the script in your browser:
 ---
 
 ## 📝 Changelog
+
+### v1.5 (2026-06-26)
+- ✨ Regular expression (Regex) support for advanced search with pattern matching
+- 👥 Support for user and organization model pages (`huggingface.co/:user/models`)
+- 🧹 Removed outdated "Ideas for future improvements" section
 
 ### v1.4 (2026-06-18)
 - 📝 Major documentation update (README in ES / EN / ZH)
@@ -220,25 +261,6 @@ To debug the script in your browser:
 
 ### v1.0 (2026-06-18)
 - 🚀 Initial release
-
----
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a branch (`git checkout -b feature/my-new-feature`)
-3. Commit your changes (`git commit -am 'Add some feature'`)
-4. Push to the branch (`git push origin feature/my-new-feature`)
-5. Open a Pull Request
-
-### Ideas for future improvements
-
-- [ ] Filter by parameter count (e.g. only 7B-13B)
-- [ ] Filter by last update date
-- [ ] Filter by number of likes / downloads
-- [ ] Export / import configuration as JSON
-- [ ] Keyboard shortcuts (e.g. `Ctrl+Shift+F` to focus the panel)
-- [ ] Advanced regular expression support
 
 ---
 

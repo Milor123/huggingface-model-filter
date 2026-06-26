@@ -7,9 +7,9 @@
 [![GitHub](https://img.shields.io/badge/GitHub-Milor123/huggingface--model--filter-181717?style=flat-square&logo=github)](https://github.com/Milor123/huggingface-model-filter)
 [![GreasyFork](https://img.shields.io/badge/GreasyFork-Instalar-green?style=flat-square&logo=tampermonkey)](https://greasyfork.org/es/scripts/583391-huggingface-model-filter)
 [![License](https://img.shields.io/badge/Licencia-MIT-blue?style=flat-square)](LICENSE)
-[![Versión](https://img.shields.io/badge/Versión-1.4-orange?style=flat-square)](https://github.com/Milor123/huggingface-model-filter)
+[![Versión](https://img.shields.io/badge/Versión-1.5-orange?style=flat-square)](https://github.com/Milor123/huggingface-model-filter)
 
-> Un userscript potente para filtrar modelos de [Hugging Face](https://huggingface.co/models) por palabras clave positivas y negativas, con interfaz flotante, soporte multiidioma y detección automática de infinite scroll. Diseñado para ViolentMonkey / TamperMonkey / Greasemonkey.
+> Un userscript potente para filtrar modelos de [Hugging Face](https://huggingface.co/models) por palabras clave positivas y negativas, con soporte Regex, panel flotante arrastrable, interfaz multiidioma y detección automática de infinite scroll. Funciona en cualquier listado de modelos, incluyendo perfiles de usuario y organización. Diseñado para ViolentMonkey / TamperMonkey / Greasemonkey.
 
 ---
 
@@ -26,9 +26,11 @@
 - ❌ **Filtrado negativo** — Ocultá o difuminá modelos que no querés ver
 - 🎨 **Interfaz flotante moderna** — Panel arrastrable, minimizable, glassmorphism, dark mode automático
 - 🔄 **Infinite Scroll** — Detecta automáticamente nuevos modelos al hacer scroll (SPA-aware)
+- 👥 **Páginas de usuario/org** — Funciona en cualquier listado de modelos de Hugging Face, incluyendo perfiles de usuario y organización
 - 💾 **Persistencia total** — Keywords, opciones y posición del panel guardados en `localStorage`
 - 🏷️ **Badges visuales** — Indicadores de color (verde/rojo) directamente sobre cada card del modelo
 - ⚡ **Auto-filtro inteligente** — Aplica filtros con debounce automático mientras escribís (~800ms)
+- 🅰️ **Soporte Regex** — Búsqueda avanzada con expresiones regulares para patrones complejos
 - 🌍 **Multiidioma** — Interfaz nativa en Español, Inglés y Chino (简体中文)
 - 🌐 **Auto-traducción (opcional)** — Traducción vía Google Translate para +30 idiomas adicionales, siempre bajo demanda explícita del usuario
 - 📊 **Contador en tiempo real** — Estadísticas de Total / Visibles / Filtrados actualizadas al instante
@@ -88,6 +90,40 @@ Visitá [https://huggingface.co/models](https://huggingface.co/models) y verás 
 - **Auto-traducir** — Checkbox opcional: elegí cualquier idioma de la lista y el panel se traduce automáticamente
 - **Aplicar** — Ejecuta el filtrado manualmente
 - **Limpiar** — Resetea palabras clave y muestra todos los modelos de nuevo
+
+---
+
+## 🅰️ Modo Regex
+
+El filtro soporta **expresiones regulares (Regex)** para búsqueda avanzada. Activá el modo regex desde el panel para cambiar entre keywords simples y patrones complejos.
+
+### Cómo funciona
+
+- Ingresá **patrones Regex positivos** para filtrar los modelos que querés ver
+- Ingresá **patrones Regex negativos** para excluir modelos no deseados
+- Separá múltiples patrones con **comas** o **saltos de línea**
+- La configuración de mayúsculas/minúsculas y palabra completa también aplica al modo Regex
+
+### Patrones soportados
+
+| Patrón | Descripción | Ejemplo |
+|--------|-------------|---------|
+| `keyword` | Coincidencia simple (igual que modo keywords) | `llama` |
+| `llama\|qwen` | O — coincide con cualquiera de los términos | `llama\|qwen` |
+| `(?=.*qwen)(?=.*uncensored)` | Positive lookahead — coincide si TODOS los patrones están presentes | `(?=.*qwen)(?=.*uncensored)` |
+| `^(?!.*beta)` | Negative lookahead — excluye si el patrón coincide | `^(?!.*beta)` |
+| `\b7b\b` | Word boundary — "7b" no coincide con "70b" | `\b7b\b` |
+| `[0-9]+b` | Clases de caracteres y cuantificadores | `7b\|13b\|70b` |
+
+> **Nota:** Los patrones se comparan contra el texto de la tarjeta del modelo. Los patrones Regex inválidos se ignoran silenciosamente y se registran en la consola (`HF Filter:`) para depuración.
+
+### Ejemplos de filtros Regex
+
+| Regex positivo | Regex negativo | Resultado |
+|----------------|----------------|-----------|
+| `(?=.*qwen)(?=.*uncensored)` | | Modelos que contienen AMBAS palabras "qwen" Y "uncensored" |
+| `llama\|mistral` | `beta\|alpha` | Modelos LLaMA o Mistral, sin versiones inestables |
+| `\b7b\b` | `\b70b\b` | Específicamente modelos de 7B, excluyendo 70B |
 
 ---
 
@@ -186,7 +222,7 @@ Para depurar el script en tu navegador:
 
 | Problema | Solución |
 |----------|----------|
-| El panel no aparece | Verificá que la URL coincida con `https://huggingface.co/models*` |
+| El panel no aparece | Asegurate de estar en un listado de modelos (ej: `huggingface.co/models` o `huggingface.co/:usuario/models`) |
 | Los filtros no se aplican | Hacé clic en **Aplicar Filtros** o esperá ~800ms tras dejar de escribir |
 | Se ocultan TODOS los modelos | Revisá que tus palabras positivas no sean demasiado restrictivas. Recargá la página |
 | El panel tapa contenido | Arrastralo a otra esquina; la posición se guarda automáticamente |
@@ -196,6 +232,11 @@ Para depurar el script en tu navegador:
 ---
 
 ## 📝 Changelog
+
+### v1.5 (2026-06-26)
+- ✨ Soporte para expresiones regulares (Regex) en la búsqueda avanzada
+- 👥 Soporte para páginas de usuario y organización (`huggingface.co/:usuario/models`)
+- 🧹 Eliminada la sección "Ideas para futuras mejoras" (obsoleta)
 
 ### v1.4 (2026-06-18)
 - 📝 Actualización mayor de documentación (README en ES / EN / ZH)
@@ -221,25 +262,6 @@ Para depurar el script en tu navegador:
 
 ### v1.0 (2026-06-18)
 - 🚀 Lanzamiento inicial
-
----
-
-## 🤝 Contribuir
-
-1. Hacé un fork del repositorio
-2. Creá una rama (`git checkout -b feature/nueva-funcion`)
-3. Hacé commit de tus cambios (`git commit -am 'Agrega nueva función'`)
-4. Push a la rama (`git push origin feature/nueva-funcion`)
-5. Abrí un Pull Request
-
-### Ideas para futuras mejoras
-
-- [ ] Filtro por número de parámetros (ej: solo 7B-13B)
-- [ ] Filtro por fecha de última actualización
-- [ ] Filtro por número de likes / descargas
-- [ ] Exportar / importar configuración como JSON
-- [ ] Atajos de teclado (ej: `Ctrl+Shift+F` para enfocar el panel)
-- [ ] Soporte para expresiones regulares avanzadas
 
 ---
 

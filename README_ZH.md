@@ -7,10 +7,10 @@
 [![GitHub](https://img.shields.io/badge/GitHub-Milor123/huggingface--model--filter-181717?style=flat-square&logo=github)](https://github.com/Milor123/huggingface-model-filter)
 [![GreasyFork](https://img.shields.io/badge/GreasyFork-安装-green?style=flat-square&logo=tampermonkey)](https://greasyfork.org/es/scripts/583391-huggingface-model-filter)
 [![License](https://img.shields.io/badge/License-MIT-blue?style=flat-square)](LICENSE)
-[![Version](https://img.shields.io/badge/Version-1.4-orange?style=flat-square)](https://github.com/Milor123/huggingface-model-filter)
+[![Version](https://img.shields.io/badge/Version-1.5-orange?style=flat-square)](https://github.com/Milor123/huggingface-model-filter)
 
-> 一个功能强大的用户脚本，通过正面/负面关键词过滤 [Hugging Face](https://huggingface.co/models)
-> 模型。支持浮动拖拽面板、多语言界面和自动无限滚动检测。
+> 一个功能强大的用户脚本，通过正面/负面关键词和正则表达式 Regex 过滤 [Hugging Face](https://huggingface.co/models)
+> 模型。支持浮动拖拽面板、多语言界面、自动无限滚动检测，以及用户/组织主页。
 > 适用于 ViolentMonkey / TamperMonkey / Greasemonkey。
 
 ---
@@ -28,9 +28,11 @@
 - ❌ **负面关键词过滤** — 隐藏或淡化不想看到的模型
 - 🎨 **现代浮动界面** — 可拖拽、可最小化、毛玻璃效果、自动暗色模式
 - 🔄 **无限滚动** — 滚动时自动检测新加载的模型（兼容 SPA）
+- 👥 **用户/组织页面** — 支持所有 Hugging Face 模型列表页面，包括用户和组织主页
 - 💾 **完整持久化** — 关键词、选项和面板位置保存在 `localStorage`
 - 🏷️ **可视化徽章** — 每个模型卡片上的颜色标识（绿色/红色）
 - ⚡ **智能自动过滤** — 输入时自动应用过滤器（~800ms 防抖）
+- 🅰️ **Regex 支持** — 支持正则表达式（Regex）高级搜索与模式匹配
 - 🌍 **多语言支持** — 原生界面：English、Español、中文（简体）
 - 🌐 **自动翻译（可选）** — 支持 30+ 种语言，通过 Google Translate 翻译，始终由用户主动开启
 - 📊 **实时统计计数** — 即时更新总数 / 可见数 / 过滤数
@@ -90,6 +92,40 @@
 - **自动翻译** — 可选复选框：从列表中选择任意语言，面板自动翻译
 - **应用** — 手动执行过滤
 - **重置** — 清除关键词并重新显示所有模型
+
+---
+
+## 🅰️ Regex 模式
+
+过滤器支持**正则表达式 (Regex)** 进行高级模式匹配。在面板中切换关键词模式与 Regex 模式即可使用。
+
+### 使用方法
+
+- 输入**正面向 Regex 模式**匹配你想看到的模型
+- 输入**负面向 Regex 模式**排除不需要的模型
+- 多个模式之间用**逗号**或**换行**分隔
+- 大小写匹配和全词匹配设置同样适用于 Regex 模式
+
+### 支持的语法
+
+| 模式 | 说明 | 示例 |
+|------|------|------|
+| `keyword` | 简单匹配（同关键词模式） | `llama` |
+| `llama\|qwen` | 或 — 匹配任一条件 | `llama\|qwen` |
+| `(?=.*qwen)(?=.*uncensored)` | 正向先行断言 — 匹配满足所有条件的模型 | `(?=.*qwen)(?=.*uncensored)` |
+| `^(?!.*beta)` | 负向先行断言 — 排除匹配条件的模型 | `^(?!.*beta)` |
+| `\b7b\b` | 词边界 — "7b" 不会匹配 "70b" | `\b7b\b` |
+| `[0-9]+b` | 字符类和量词 | `7b\|13b\|70b` |
+
+> **注意：** 模式会与模型卡片文本进行比较。无效的 Regex 模式会被静默忽略并记录到控制台（`HF Filter:`）以供调试。
+
+### 示例 Regex 过滤
+
+| 正向 Regex | 负向 Regex | 结果 |
+|-----------|-----------|------|
+| `(?=.*qwen)(?=.*uncensored)` | | 同时包含 "qwen" 和 "uncensored" 的模型 |
+| `llama\|mistral` | `beta\|alpha` | LLaMA 或 Mistral 模型，排除不稳定版本 |
+| `\b7b\b` | `\b70b\b` | 专门匹配 7B 模型，排除 70B |
 
 ---
 
@@ -191,7 +227,7 @@ Dansk、Suomi、Norsk、Bahasa Indonesia、Bahasa Melayu、বাংলা。
 
 | 问题 | 解决方法 |
 |------|----------|
-| 面板未显示 | 确认 URL 匹配 `https://huggingface.co/models*` |
+| 面板未显示 | 确保在 Hugging Face 模型列表页面（例如 `huggingface.co/models` 或 `huggingface.co/:用户/models`） |
 | 过滤器未生效 | 点击 **应用过滤器** 或停止输入约 800ms 后自动生效 |
 | 所有模型都被隐藏 | 检查正面关键词是否过于严格，尝试刷新页面 |
 | 面板遮挡内容 | 将其拖拽到其他角落，位置会自动保存 |
@@ -201,6 +237,11 @@ Dansk、Suomi、Norsk、Bahasa Indonesia、Bahasa Melayu、বাংলা。
 ---
 
 ## 📝 更新日志
+
+### v1.5（2026-06-26）
+- ✨ 支持正则表达式（Regex）高级搜索与模式匹配
+- 👥 支持用户和组织模型页面（`huggingface.co/:用户/models`）
+- 🧹 移除过时的"未来改进计划"章节
 
 ### v1.4（2026-06-18）
 - 📝 文档大更新（新增 ES / EN / ZH 三版 README）
@@ -226,25 +267,6 @@ Dansk、Suomi、Norsk、Bahasa Indonesia、Bahasa Melayu、বাংলা。
 
 ### v1.0（2026-06-18）
 - 🚀 首次发布
-
----
-
-## 🤝 参与贡献
-
-1. Fork 本仓库
-2. 创建分支（`git checkout -b feature/新功能`）
-3. 提交更改（`git commit -am '添加新功能'`）
-4. 推送到分支（`git push origin feature/新功能`）
-5. 提交 Pull Request
-
-### 未来改进计划
-
-- [ ] 参数数量过滤（例如：仅 7B-13B）
-- [ ] 最后更新日期过滤
-- [ ] 点赞 / 下载量过滤
-- [ ] 配置导出 / 导入为 JSON
-- [ ] 键盘快捷键（例如：`Ctrl+Shift+F` 聚焦面板）
-- [ ] 高级正则表达式支持
 
 ---
 
